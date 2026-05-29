@@ -1,0 +1,15 @@
+{
+  "name": "@semantic-cve/search",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "scripts": { "build": "tsc", "lint": "tsc --noEmit" },
+  "dependencies": {
+    "@semantic-cve/shared": "workspace:*",
+    "@semantic-cve/db": "workspace:*",
+    "@semantic-cve/embeddings": "workspace:*",
+    "@semantic-cve/vector-store": "workspace:*"
+  },
+  "devDependencies": { "@types/node": "^22.0.0", "typescript": "^5.7.0" }
+}

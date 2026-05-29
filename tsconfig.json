@@ -1,0 +1,14 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "paths": {
+      "@semantic-cve/shared": ["./packages/shared/src"],
+      "@semantic-cve/db": ["./packages/db/src"],
+      "@semantic-cve/vector-store": ["./packages/vector-store/src"],
+      "@semantic-cve/cve-parser": ["./packages/cve-parser/src"],
+      "@semantic-cve/embeddings": ["./packages/embeddings/src"],
+      "@semantic-cve/search": ["./packages/search/src"]
+    }
+  },
+  "include": ["apps/*/src", "packages/*/src", "scripts"]
+}

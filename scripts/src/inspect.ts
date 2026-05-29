@@ -1,0 +1,11 @@
+import { getDb, closeDb } from '@semantic-cve/db';
+getDb();
+const d = getDb();
+d.pragma('journal_mode = WAL');
+const r = d.prepare('SELECT cve_id FROM cves LIMIT 3').all() as { cve_id: string }[];
+console.log('sample:', r.map(x => JSON.stringify(x.cve_id)).join(', '));
+const r2 = d.prepare("SELECT cve_id FROM cves WHERE instr(cve_id, 'CVE-') = 0 LIMIT 3").all();
+console.log('without CVE-:', JSON.stringify(r2));
+const r3 = d.prepare("SELECT cve_id FROM cves WHERE instr(cve_id, '\\') > 0 OR instr(cve_id, '/') > 0 LIMIT 3").all();
+console.log('with path sep:', JSON.stringify(r3));
+closeDb();

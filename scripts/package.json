@@ -1,0 +1,29 @@
+{
+  "name": "@semantic-cve/scripts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "sync": "tsx src/sync-cves.ts",
+    "embed": "tsx src/embed-cves.ts",
+    "daily": "tsx src/daily-update.ts",
+    "inspect": "tsx src/inspect.ts",
+    "check": "tsx -e \"import{getDb,closeDb}from'@semantic-cve/db';getDb();const d=getDb();const c=d.prepare('SELECT COUNT(*) as c FROM cves').get().c;const e=d.prepare('SELECT COUNT(*) as c FROM embeddings WHERE vector IS NOT NULL').get().c;const h=d.prepare('SELECT COUNT(*) as c FROM hashes').get().c;console.log('CVEs='+c+' Embeddings='+e+' Hashes='+h);closeDb();\"",
+    "fix-cveids": "tsx src/fix-cveids.ts",
+    "speedtest": "tsx src/speedtest.ts",
+    "drop-embeddings": "tsx src/drop-embeddings.ts",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@semantic-cve/shared": "workspace:*",
+    "@semantic-cve/db": "workspace:*",
+    "@semantic-cve/cve-parser": "workspace:*",
+    "@semantic-cve/embeddings": "workspace:*",
+    "@semantic-cve/vector-store": "workspace:*"
+  },
+  "devDependencies": {
+    "tsx": "^4.0.0",
+    "typescript": "^5.7.0",
+    "@types/node": "^22.0.0"
+  }
+}

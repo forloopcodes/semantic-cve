@@ -1,0 +1,39 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+.next/
+*.tsbuildinfo
+
+# Turbo
+.turbo/
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+logs/
+
+# Cache
+.cache/
+
+# CVE data cache
+cve-cache/
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp scratch files
+_dbcheck.*
+_embedtest.*
+_inspect.*
+__test_batch.json

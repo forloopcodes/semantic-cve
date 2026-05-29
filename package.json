@@ -1,0 +1,18 @@
+{
+  "name": "semantic-cve",
+  "private": true,
+  "workspaces": ["apps/*", "packages/*", "scripts"],
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "turbo lint",
+    "sync:cves": "bun run --filter @semantic-cve/scripts sync",
+    "embed:cves": "bun run --filter @semantic-cve/scripts embed",
+    "update:daily": "bun run --filter @semantic-cve/scripts daily"
+  },
+  "devDependencies": {
+    "turbo": "^2.0.0",
+    "typescript": "^5.7.0"
+  },
+  "packageManager": "bun@1.3.14"
+}
