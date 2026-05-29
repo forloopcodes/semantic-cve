@@ -1,7 +1,8 @@
+// CVE detail page with query-param routing for static export
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
-import { useState, useEffect } from "react";
+import { useSearchParams, useRouter } from "next/navigation";
+import { useState, useEffect, Suspense } from "react";
 import { ArrowLeft, ExternalLink, AlertTriangle, Bug, Calendar, Tag, Box } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -55,8 +56,9 @@ function MetaCard({ icon: Icon, label, value }: { icon: React.ElementType; label
   );
 }
 
-export default function CveDetailPage() {
-  const { id } = useParams<{ id: string }>();
+function CveContent() {
+  const searchParams = useSearchParams();
+  const id = searchParams.get("id");
   const router = useRouter();
   const [cve, setCve] = useState<CveDetail | null>(null);
   const [similar, setSimilar] = useState<{ cve: { cveId: string; description: string; cvssSeverity: string | null; cvssScore: number | null; vendor: string | null; product: string | null; publishedDate: string | null }; score: number }[]>([]);
@@ -209,5 +211,28 @@ export default function CveDetailPage() {
         </TabsContent>
       </Tabs>
     </div>
+  );
+}
+
+export default function CvePage() {
+  return (
+    <Suspense fallback={
+      <div className="mx-auto max-w-4xl px-4 py-8">
+        <Skeleton className="mb-8 h-5 w-16" />
+        <div className="mb-8 space-y-3">
+          <Skeleton className="h-8 w-72" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-3/4" />
+        </div>
+        <div className="mb-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {Array.from({ length: 4 }).map((_, i) => (
+            <Skeleton key={i} className="h-20 rounded-xl" />
+          ))}
+        </div>
+        <Skeleton className="h-4 w-64" />
+      </div>
+    }>
+      <CveContent />
+    </Suspense>
   );
 }
