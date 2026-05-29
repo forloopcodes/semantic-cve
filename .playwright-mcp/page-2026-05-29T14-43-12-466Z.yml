@@ -1,0 +1,32 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - banner [ref=e3]:
+      - generic [ref=e4]:
+        - button "Semantic CVE" [ref=e5]:
+          - generic [ref=e6]: Semantic CVE
+        - generic [ref=e42]:
+          - img
+          - textbox "Search vulnerabilities..." [ref=e43]
+        - navigation [ref=e7]:
+          - button "Search" [ref=e44]
+          - link "GitHub repository" [ref=e8] [cursor=pointer]:
+            - /url: https://github.com/forloopcodes/semantic-cve
+            - img [ref=e9]
+    - main [ref=e11]:
+      - generic [ref=e46]:
+        - button [ref=e47]:
+          - img
+        - generic [ref=e49]:
+          - img
+          - textbox "Search vulnerabilities..." [ref=e50]: Windows privilege escalation using symbolic links
+        - combobox [ref=e51]:
+          - generic [ref=e52]: hybrid
+          - img: ▼
+        - textbox [ref=e53]: hybrid
+    - contentinfo [ref=e33]:
+      - generic [ref=e34]:
+        - generic [ref=e35]:
+          - img [ref=e36]
+          - generic [ref=e38]: Semantic CVE — vulnerability intelligence platform
+        - paragraph [ref=e39]: © 2026 Semantic CVE
+  - alert [ref=e40]

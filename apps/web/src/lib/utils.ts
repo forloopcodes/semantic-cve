@@ -14,4 +14,4 @@ export const formatDate = (d: Date | string | null) => {
   });
 };
 
-export const API_BASE = process.env.NEXT_PUBLIC_API_URL ?? "http://localhost:4000";
+export const API_BASE = "https://field-translations-reproduced-property.trycloudflare.com";

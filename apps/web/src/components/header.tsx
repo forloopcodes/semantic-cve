@@ -1,23 +1,14 @@
 "use client";
 
 import { useRouter, usePathname } from "next/navigation";
-import { Search, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
-import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 
 export function Header() {
   const router = useRouter();
   const pathname = usePathname();
   const isHome = pathname === "/";
-  const [searchVal, setSearchVal] = useState("");
-
-  const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchVal.trim())
-      router.push(`/search?q=${encodeURIComponent(searchVal.trim())}`);
-  };
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
@@ -30,20 +21,6 @@ export function Header() {
             Semantic CVE
           </span>
         </button>
-
-        {!isHome && (
-          <form onSubmit={handleSearch} className="flex-1 max-w-md hidden sm:block">
-            <div className="relative">
-              <Search className="pointer-events-none absolute left-2.5 top-1/2 size-3.5 -translate-y-1/2 text-muted-foreground" />
-              <Input
-                value={searchVal}
-                onChange={(e) => setSearchVal(e.target.value)}
-                placeholder="Search vulnerabilities..."
-                className="h-8 pl-8 text-sm rounded-lg"
-              />
-            </div>
-          </form>
-        )}
 
         <div className="flex-1" />
 
@@ -85,16 +62,6 @@ export function Header() {
               >
                 <span className="text-sm font-heading">Semantic CVE</span>
               </button>
-              {!isHome && (
-                <form onSubmit={handleSearch}>
-                  <Input
-                    value={searchVal}
-                    onChange={(e) => setSearchVal(e.target.value)}
-                    placeholder="Search..."
-                    className="h-9 text-sm"
-                  />
-                </form>
-              )}
             </div>
           </SheetContent>
         </Sheet>
