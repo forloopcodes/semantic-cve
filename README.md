@@ -106,7 +106,7 @@ semantic-cve/
 Next.js 15 static export with Tailwind CSS v4, consumed by Cloudflare Pages via `NEXT_PUBLIC_API_URL`.
 
 | Route | Purpose |
-|---|---|
+| --- | --- |
 | `/` | Hero search bar with example query chips |
 | `/search?q=&mode=` | Search results with pagination and mode selector |
 | `/cve?id=` | CVE detail with metadata, similar CVEs, references, raw JSON (query-param for static export) |
@@ -124,7 +124,7 @@ Fastify 5 server with CORS enabled, serving as the backend for both the web fron
 **Routes:**
 
 | Method | Route | Description |
-|---|---|---|
+| --- | --- | --- |
 | `GET` | `/api/health` | Health check returning `{ status, timestamp }` |
 | `GET` | `/api/search?query=&mode=&limit=&offset=&cvssMin=&cvssMax=&cwe=&vendor=&product=` | Search CVEs across all four modes |
 | `GET` | `/api/cves/:id` | Single CVE detail by CVE ID |
@@ -134,7 +134,7 @@ Fastify 5 server with CORS enabled, serving as the backend for both the web fron
 **Search query parameters:**
 
 | Parameter | Type | Default | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `query` | string | — | **Required.** Natural language or keyword query |
 | `mode` | string | `hybrid` | One of: `semantic`, `fulltext`, `regex`, `hybrid` |
 | `limit` | number | `20` | Max results to return |
@@ -167,7 +167,7 @@ The server reads JSON-RPC requests from `stdin`, processes them, and writes resp
 **Available Tools:**
 
 | Tool | Input | Returns | Implementation |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `search_cves` | `{ query: string, mode?: 'semantic'\|'fulltext'\|'regex'\|'hybrid', limit?: number }` | Ranked CVE results with similarity scores and match types | Delegates to `@semantic-cve/search` |
 | `get_cve` | `{ id: string }` | Full CVE detail including description, CVSS, vendor, product, references | Calls `getCveById()` from `@semantic-cve/db` |
 | `related_cves` | `{ id: string, limit?: number }` | Semantically similar CVEs via vector proximity | Loads source CVE embedding, runs in-memory `topK` against all other vectors |
@@ -220,7 +220,7 @@ SQLite database layer using `better-sqlite3`. Provides schema initialization (vi
 **Schema:**
 
 | Table | Purpose |
-|---|---|
+| --- | --- |
 | `cves` | Core CVE metadata: CVE ID, description, CWE, vendor, product, affected versions, CVSS score/severity, dates, raw JSON |
 | `cve_fts` | FTS5 virtual table over `cves` for full-text search on description, vendor, product, and CWE |
 | `embeddings` | BLOB vector storage (1024-dim Float32Array per CVE) |
@@ -263,7 +263,7 @@ Configured via `OLLAMA_URL` environment variable (default: `http://localhost:114
 Four search engine implementations that combine the DB queries and embedding pipeline:
 
 | Engine | Implementation | Latency Profile |
-|---|---|---|
+| --- | --- | --- |
 | **Semantic** | Embed query via Ollama → cosine similarity against all 354k vectors | ~500ms first query (model warmup), ~20ms subsequent (embedding cache) |
 | **Full-text** | Direct FTS5 query | <50ms |
 | **Regex** | SQL `REGEXP` on description/vendor/product | <200ms |
@@ -339,7 +339,7 @@ jobs:
 ### Utility Scripts
 
 | Script | Purpose |
-|---|---|
+| --- | --- |
 | `scripts/inspect.ts` | Quick DB inspection — prints CVE count, embedding count, hash count |
 | `scripts/drop-embeddings.ts` | Resets the embeddings table (for full re-embedding) |
 | `scripts/fix-cveids.ts` | Repairs CVE ID mismatches between cves and embeddings tables |
@@ -451,7 +451,7 @@ This provides the best balance of semantic understanding and keyword precision. 
 ## Deployment
 
 | Component | Recommendation | Notes |
-|---|---|---|---|
+| --- | --- | --- |
 | Frontend | **Cloudflare Pages** | Static export via Next.js `output: 'export'`. Set `NEXT_PUBLIC_API_URL` to your tunnel or API endpoint |
 | API | **Local / VPS** | Requires Ollama + SQLite. 2GB RAM minimum for embedding model |
 | MCP Server | **Co-located with API** | Needs access to the same SQLite database and Ollama instance |
@@ -492,7 +492,7 @@ bun run --filter @semantic-cve/api dev
 ### Environment Variables
 
 | Variable | Default | Description |
-|---|---|---|---|
+| --- | --- | --- | --- |
 | `OLLAMA_URL` | `http://localhost:11434` | Ollama server URL |
 | `API_PORT` | `4000` | Fastify listen port |
 | `API_HOST` | `0.0.0.0` | Fastify listen host |
@@ -501,7 +501,7 @@ bun run --filter @semantic-cve/api dev
 ## Tech Stack
 
 | Component | Technology |
-|---|---|
+| --- | --- |
 | Runtime | Node.js via [Bun](https://bun.sh) |
 | Monorepo | [Turborepo](https://turbo.build) |
 | API Framework | [Fastify](https://fastify.dev) 5 |
