@@ -14,4 +14,4 @@ export const formatDate = (d: Date | string | null) => {
   });
 };
 
-export const API_BASE = "https://parking-simulation-registration-saving.trycloudflare.com";
+export const API_BASE = (process.env.NEXT_PUBLIC_API_URL || "http://localhost:4000").trim();
